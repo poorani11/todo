@@ -20,9 +20,18 @@ todoApp.controller('homeController', ['$scope', function($scope){
         $scope.todos.splice(start, 1);
     };
 
-    $scope.move = function(index){
-        if (index === $scope.todos.length - 1){
-            return;
+    $scope.move = function(index, direction){
+        if(direction === 'up')
+        {
+            if(index === 0){
+                return;
+            }
+            index = index - 1;
+        }
+        if(direction === 'down'){
+            if (index === $scope.todos.length - 1){
+                return;
+            }
         }
         var todo = $scope.todos[index];
             $scope.todos.splice(index +2 , 0, todo);
