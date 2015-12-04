@@ -25,6 +25,10 @@
         <input type="checkbox" ng-model="todo.done" />
         <input type="text" ng-model="todo.text"/>
     </div>
+    <form ng-submit="addTodo()">
+        <input type="text" ng-model="todoText" />
+        <input type="submit" />
+    </form>
 </body>
 </html>
 

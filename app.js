@@ -7,4 +7,7 @@ todoApp.controller('homeController', ['$scope', function($scope){
         {done:true,text:'first'},
         {done:false,text:'second'}
     ];
+    $scope.addTodo = function(){
+        
+    };
 }]);
