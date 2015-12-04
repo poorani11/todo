@@ -24,6 +24,7 @@
     <div ng-repeat="todo in todos">
         <input type="checkbox" ng-model="todo.done" />
         <input type="text" ng-model="todo.text"/>
+        <a href='' ng-click="removeTodo($index)">Remove</a>
     </div>
     <form ng-submit="addTodo()">
         <input type="text" ng-model="todoText" />

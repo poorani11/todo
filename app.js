@@ -15,4 +15,8 @@ todoApp.controller('homeController', ['$scope', function($scope){
     $scope.todos.push(newTodo);
     $scope.todoText = '';   
     };
+    
+    $scope.removeTodo = function(start){
+        $scope.todos.splice(start, 1);
+    };
 }]);
