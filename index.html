@@ -42,6 +42,10 @@
             <a href='' ng-click="move($index, 'down')"><span class="glyphicon glyphicon-arrow-down"></span></a>
             <a href='' ng-click="removeTodo($index)"><span class="glyphicon glyphicon-remove-circle"></span></a>
         </div>
+        <div class="list-group-item" ng-show="todoText">
+            <input type="checkbox" disabled="true" />
+            <input type="text" class="todo" placeholder="{{todoText}}" disabled="true" />
+        </div>
         <form ng-submit="addTodo()" class="list-group-item">
             <input type="text" ng-model="todoText" />
             <input type="submit" />
