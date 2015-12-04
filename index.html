@@ -13,6 +13,16 @@
         {
             font-size: 1.05em;
         }
+        .container
+        {
+            width:400px;
+        }
+        .todo{
+            border: none;
+        }
+        .title{
+            background-color: grey;
+        }
     </style>
     
     <!-- load angular via CDN -->
@@ -23,17 +33,20 @@
     <script src="app.js"></script>
 </head>
 <body ng-controller="homeController">
-    <div ng-repeat="todo in todos">
-        <input type="checkbox" ng-model="todo.done" />
-        <input type="text" ng-model="todo.text"/>
-        <a href='' ng-click="move($index, 'up')">Up</a>
-        <a href='' ng-click="move($index, 'down')">Down</a>
-        <a href='' ng-click="removeTodo($index)">Remove</a>
+    <div class="container">
+        <h3 class="list-group-item title">Angular ToDo</h3>
+        <div ng-repeat="todo in todos" class="list-group-item">
+            <input type="checkbox" ng-model="todo.done" />
+            <input type="text" ng-model="todo.text" class="todo"/>
+            <a href='' ng-click="move($index, 'up')"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            <a href='' ng-click="move($index, 'down')"><span class="glyphicon glyphicon-arrow-down"></span></a>
+            <a href='' ng-click="removeTodo($index)"><span class="glyphicon glyphicon-remove-circle"></span></a>
+        </div>
+        <form ng-submit="addTodo()" class="list-group-item">
+            <input type="text" ng-model="todoText" />
+            <input type="submit" />
+        </form>
     </div>
-    <form ng-submit="addTodo()">
-        <input type="text" ng-model="todoText" />
-        <input type="submit" />
-    </form>
 </body>
 </html>
 
