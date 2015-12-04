@@ -1,11 +1,13 @@
 // MODULE
-var todoApp = angular.module('todoApp', []);
+var todoApp = angular.module('todoApp', ['firebase']);
 
 // CONTROLLERS
-todoApp.controller('homeController', ['$scope', function($scope){
+todoApp.controller('homeController', ['$scope','angularFire', function($scope, angularFire){
+    var fireData = new Firebase('https://angularjs-trello.firebaseio.com/');
+
+    angularFire(fireData, $scope, 'todos');
+    
     $scope.todos = [ 
-        {done:true,text:'first'},
-        {done:false,text:'second'}
     ];
     $scope.addTodo = function(){
         var newTodo ={
