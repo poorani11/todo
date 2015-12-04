@@ -8,6 +8,11 @@ todoApp.controller('homeController', ['$scope', function($scope){
         {done:false,text:'second'}
     ];
     $scope.addTodo = function(){
-        
+        var newTodo ={
+            done:false,
+            text:$scope.todoText
+        };
+    $scope.todos.push(newTodo);
+    $scope.todoText = '';   
     };
 }]);
