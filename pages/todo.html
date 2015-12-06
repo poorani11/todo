@@ -1,0 +1,19 @@
+<div class="container">
+        
+    <h3 class="list-group-item title">Angular ToDo</h3>
+    <div ng-repeat="todo in todos" class="list-group-item">
+        <input type="checkbox" ng-model="todo.done" />
+        <input type="text" ng-model="todo.text" class="todo"/>
+        <a href='' ng-click="move($index, 'up')"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a href='' ng-click="move($index, 'down')"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        <a href='' ng-click="removeTodo($index)"><span class="glyphicon glyphicon-remove-circle"></span></a>
+    </div>
+    <div class="list-group-item" ng-show="todoText">
+        <input type="checkbox" disabled="true" />
+        <input type="text" class="todo" placeholder="{{todoText}}" disabled="true" />
+    </div>
+    <form ng-submit="addTodo()" class="list-group-item">
+        <input type="text" ng-model="todoText" />
+        <input type="submit" />
+     </form>
+</div>

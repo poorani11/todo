@@ -1,10 +1,62 @@
 // MODULE
-var todoApp = angular.module('todoApp', ['firebase']);
+var todoApp = angular.module('todoApp', ['firebase','ngRoute']);
+
+// ROUTES
+todoApp.config(function ($routeProvider){
+
+    $routeProvider
+
+    .when('/', {
+        templateUrl: 'pages/home.html',
+        controller: 'MyAuthCtrl'
+    })
+    .when('/signup', {
+        templateUrl: 'pages/signup.html',
+        controller: 'MyAuthCtrl'
+    })
+    .when('/todolist', {
+        templateUrl: 'pages/todo.html',
+        controller: 'homeController'
+    })
+});
 
 // CONTROLLERS
-todoApp.controller('homeController', ['$scope','angularFire', function($scope, angularFire){
-    var fireData = new Firebase('https://angularjs-trello.firebaseio.com/');
+todoApp.controller("MyAuthCtrl", ["$scope", "$firebaseAuth",'$location', function($scope, $firebaseAuth,$location) {
+    var ref = new Firebase("https://angularjs-trello.firebaseio.com/");
+    $scope.authObj = $firebaseAuth(ref);
+    
+    $scope.loginTodo = function(){
+        ref.authWithPassword({
+        email    : $scope.email,
+        password : $scope.password
+        }, function(error, authData) {
+        if (error) {
+        console.log("Login Failed!", error);
+        } else {
+        console.log("Authenticated successfully with payload:", authData);
+        $location.path('/todolist');
+        }
+        });
+    };
 
+    $scope.signupTodo = function(){
+        ref.createUser({
+          email    : $scope.email,
+          password : $scope.password
+        }, function(error, userData) {
+          if (error) {
+            console.log("Error creating user:", error);
+          } else {
+            console.log("Successfully created user account with uid:", userData.uid);
+            $scope.loginTodo();
+            
+          }
+        });
+    };    
+}]);
+
+todoApp.controller('homeController', ['$scope','angularFire', function($scope,angularFire){
+    var fireData = new Firebase('https://angularjs-trello.firebaseio.com/');
     angularFire(fireData, $scope, 'todos');
     
     $scope.todos = [ 
